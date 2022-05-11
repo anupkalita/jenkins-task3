@@ -22,5 +22,14 @@ pipeline{
         }
       }
 
+      stage('pushing to docker hub'){
+        steps{
+          withCredentials([usernamePassword(credentialsId: 'dockerhub-cred-anupk', passwordVariable: 'passwordVar', usernameVariable: 'usernameVar')]) {
+            sh "docker login --username $usernameVar --password $passwordVar"
+          }
+          sh "docker push anup10/jenkins-task3:$BUILD_NAME"
+        }
+      }
+
     }
 }
