@@ -9,7 +9,7 @@ pipeline{
 
       stage('build docker image'){
         steps{
-          sh "docker build -t jenkins-task3:$BUILD_NAME ."
+          sh "docker build -t anup10/jenkins-task3:$BUILD_NAME ."
         }
       }
 
