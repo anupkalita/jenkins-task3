@@ -17,7 +17,7 @@ pipeline{
         steps{
           sh "git tag $BUILD_NAME"
           withCredentials([gitUsernamePassword(credentialsId: 'github_creds', gitToolName: 'git-tool')]) {
-            sh "git push $BUILD_NAME master"
+            sh "git push --tags"
           }
         }
       }
