@@ -35,7 +35,7 @@ pipeline{
 
     post{
       success{
-        build job: 'jenkins-task3-deploy',parameters:[string(name: 'build_number',value: "$currentBuild.number")]
+        build job: 'jenkins-task3--deploy',parameters:[string(name: 'build_number',value: "$currentBuild.number")]
       }
     }
 }
