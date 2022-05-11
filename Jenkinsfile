@@ -17,8 +17,16 @@ pipeline{
         steps{
           sh "git tag $BUILD_NAME"
           withCredentials([gitUsernamePassword(credentialsId: 'github_creds', gitToolName: 'git-tool')]) {
-            sh "git push --tags"
+            sh "git push $BUILD_NAME"
           }
+        }
+      }
+
+      stage('pushing to docker hub'){
+        steps{
+          sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+          sh "docker push anup10/jenkins-task3:$BUILD_NAME"
+          sh 'docker logout'
         }
       }
 
