@@ -16,11 +16,12 @@ pipeline{
       stage('tagging in git'){
         steps{
           sh "git tag $BUILD_NAME"
-          withCredentials([gitUsernamePassword(credentialsId: 'github_creds', gitToolName: 'git-tool')]) {
+          sshagent (credentials: ['github_credentials']) {
             sh "git push --tags"
           }
         }
       }
 
     }
+
 }
