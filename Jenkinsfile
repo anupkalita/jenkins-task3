@@ -9,7 +9,7 @@ pipeline{
 
       stage('build docker image'){
         steps{
-          sh "docker build -t nagarajan2312/jenkins_assignment_10:$BUILD_NAME ."
+          sh "docker build -t jenkins-task3:$BUILD_NAME ."
         }
       }
 
@@ -27,7 +27,7 @@ pipeline{
           withCredentials([usernamePassword(credentialsId: 'dockerhub_credentials', passwordVariable: 'passwordVar', usernameVariable: 'usernameVar')]) {
             sh "docker login --username $usernameVar --password $passwordVar"
           }
-          sh "docker push nagarajan2312/jenkins_assignment_10:$BUILD_NAME"
+          sh "docker push jenkins-task3:$BUILD_NAME"
         }
       }
 
@@ -35,7 +35,7 @@ pipeline{
 
     post{
       success{
-        build job: 'assignment10_another_pipeline',parameters:[string(name: 'build_number',value: "$currentBuild.number")]
+        build job: 'jenkins-task3-deploy',parameters:[string(name: 'build_number',value: "$currentBuild.number")]
       }
     }
 }
