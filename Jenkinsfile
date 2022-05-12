@@ -4,7 +4,6 @@ pipeline{
     environment{
       BUILD_NAME = "build-$currentBuild.number"
     }
-
     stages{
 
       stage('build docker image'){
